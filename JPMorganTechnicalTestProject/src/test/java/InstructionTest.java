@@ -179,4 +179,50 @@ public class InstructionTest {
         Assert.assertEquals(totalPrice, 17894.77 + 165956.25, 0);
 
     }
+    
+    
+    @Test
+    public void test_report_ranking() {
+        List<Instruction> list = new ArrayList<>();
+
+        Instruction instruction1 = createInstruction(
+                "bar",
+                "S",
+                0.22,
+                "AED",
+                getDate("24/05/2017"),
+                getDate("26/05/2017"),
+                450,
+                150.5);
+        
+        Instruction instruction2 = createInstruction(
+                "bar+",
+                "S",
+                0.26,
+                "SGP",
+                getDate("24/05/2017"),
+                getDate("28/05/2017"),
+                1135,
+                1135.15);
+        
+        Instruction instruction3 = createInstruction(
+                "bar+=",
+                "S",
+                0.26,
+                "SGP",
+                getDate("24/05/2017"),
+                getDate("28/05/2017"),
+                1135,
+                10.15);
+        
+        list.add(instruction1);
+        list.add(instruction2);
+        list.add(instruction3);
+
+        
+        Report report = new Report();
+        report.reportRankingEntities(list);
+        
+        Assert.assertEquals(list.get(0), instruction2);
+    }
 }
